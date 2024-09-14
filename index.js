@@ -5,13 +5,33 @@ const app = express();
 const cors = require("cors");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 dotenv.config();
 
+// CORS Middleware
+
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
+
+//************/
+
+// CORS Middleware
+
+// CORS Middleware
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed methods
+    allowedHeaders: "Content-Type, Authorization", // Allowed headers
+  })
+);
+
+// Preflight request handling
+app.options("*", cors());
+
+/****** */
 app.use(express.json());
 
 const userRoutes = require("./Routes/userRoutes");
